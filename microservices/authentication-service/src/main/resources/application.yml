@@ -1,0 +1,79 @@
+spring:
+  application:
+    name: customer-service
+  #  profiles.active: develop
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 5MB
+      enabled: true
+  h2:
+    console:
+      enabled: true
+      path: /console
+      settings:
+        trace: false
+        web-allow-others: false
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    database: MYSQL
+    generate-ddl: false
+    show-sql: false
+    hibernate:
+      ddl-auto: none
+      hibernate.connection.CharSet: utf8
+      hibernate.connection.characterEncoding: utf8
+      hibernate.connection.useUnicode: true
+      globally_quoted_identifiers: true
+    properties:
+      hibernate.cache.use_second_level_cache: false
+      hibernate.cache.use_query_cache: false
+      hibernate.generate_statistics: false
+      hibernate.show_sql: false
+      hibernate.format_sql: false
+      hibernate.jdbc.batch_size: 500
+      hibernate.order_inserts: true
+      hibernate.order_updates: true
+  datasource:
+    databaseDriverName: com.mysql.cj.jdbc.Driver
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    maxPool: 5
+    maxIdle: 4
+    minIdle: 0
+  liquibase:
+    enabled: true
+    change-log: classpath:db.changelog/changelog-master.yml
+    # drop-first: false
+#      default-schema: public
+server:
+  port: 8091
+
+management.endpoint.health.show-details: "ALWAYS"
+management.endpoints.web.exposure.include: "*"
+
+#spring.cloud.function.definition: messageProcessor
+#spring.cloud.stream:
+#  defaultBinder: kafka
+#  default.contentType: application/json
+#  bindings.messageProcessor-in-0:
+#    destination: createMerchant
+#    group: createMerchantGroup
+#    maxAttempts: 3
+#    backOffInitialInterval: 500
+#    backOffMaxInterval: 1000
+#    backOffMultiplier: 2.0
+#    enableDlq: true
+#spring.cloud.stream.kafka.binder:
+#  brokers: 127.0.0.1
+#  defaultBrokerPort: 9092
+
+
+#springdoc:
+#  swagger-ui.path: /openapi/swagger-ui.html
+#  api-docs.path: /openapi/v3/api-docs
+#  packagesToScan: com.foneloan
+#  pathsToMatch: /**
+#  cache.disabled: true
+
