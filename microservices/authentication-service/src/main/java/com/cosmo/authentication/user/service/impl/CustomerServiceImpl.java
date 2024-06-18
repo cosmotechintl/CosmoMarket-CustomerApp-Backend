@@ -8,6 +8,7 @@ import com.cosmo.authentication.user.model.SearchCustomerResponse;
 import com.cosmo.authentication.user.model.request.BlockCustomerRequest;
 import com.cosmo.authentication.user.model.request.DeleteCustomerRequest;
 import com.cosmo.authentication.user.model.request.UnblockCustomerRequest;
+import com.cosmo.authentication.user.model.request.UpdateCustomerRequest;
 import com.cosmo.authentication.user.repo.CustomerRepository;
 import com.cosmo.authentication.user.repo.CustomerSearchRepository;
 import com.cosmo.authentication.user.service.CustomerService;
@@ -103,6 +104,23 @@ public class CustomerServiceImpl implements CustomerService {
             return Mono.just(ResponseUtil.getSuccessfulApiResponse("Customer unblocked successfully"));
         }
         return Mono.just(ResponseUtil.getFailureResponse("Customer unblock failed"));
+    }
+
+    @Override
+    public Mono<ApiResponse<?>> updateCustomer(UpdateCustomerRequest updateCustomerRequest) {
+        Optional<Customer> existedNumber = customerRepository.findByMobileNumber(updateCustomerRequest.getMobileNumber());
+        if (existedNumber.isPresent() && !existedNumber.get().getEmail().equals(updateCustomerRequest.getEmail())) {
+            return Mono.just(ResponseUtil.getFailureResponse("The mobile number is linked to another account."));
+        }
+        Optional<Customer> customer = customerRepository.findByEmail(updateCustomerRequest.getEmail());
+        Customer customer1 = customer.get();
+        if ("BLOCKED".equals(customer1.getStatus().getName()) || "DELETED".equals(customer1.getStatus().getName())) {
+            return Mono.just(ResponseUtil.getNotFoundResponse("Customer not found"));
+        } else {
+            Customer updatedCustomer = customerMapper.updateCustomer(updateCustomerRequest, customer1);
+            customerRepository.save(updatedCustomer);
+            return Mono.just(ResponseUtil.getSuccessfulApiResponse("Customer updated successfully"));
+        }
     }
 }
 

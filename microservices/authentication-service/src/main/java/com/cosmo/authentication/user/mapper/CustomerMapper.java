@@ -4,6 +4,7 @@ package com.cosmo.authentication.user.mapper;
 import com.cosmo.authentication.user.entity.Customer;
 import com.cosmo.authentication.user.model.CustomerDetailDto;
 import com.cosmo.authentication.user.model.SearchCustomerResponse;
+import com.cosmo.authentication.user.model.request.UpdateCustomerRequest;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.ReportingPolicy;
@@ -21,4 +22,14 @@ public abstract class CustomerMapper {
         return customers.stream().map(this::entityToResponse).collect(Collectors.toList());
     }
     public abstract CustomerDetailDto getCustomerDetails(Customer customer);
+
+    public Customer updateCustomer(UpdateCustomerRequest request, Customer customer){
+        customer.setName(request.getName());
+        customer.setUsername(request.getUsername());
+        customer.setMobileNumber(request.getMobileNumber());
+        customer.setAddress(request.getAddress());
+        customer.setProfilePictureName(request.getProfilePictureName());
+        return  customer;
+    }
+
 }

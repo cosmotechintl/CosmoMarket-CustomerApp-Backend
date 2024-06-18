@@ -4,6 +4,7 @@ import com.cosmo.authentication.user.model.FetchCustomerDetail;
 import com.cosmo.authentication.user.model.request.BlockCustomerRequest;
 import com.cosmo.authentication.user.model.request.DeleteCustomerRequest;
 import com.cosmo.authentication.user.model.request.UnblockCustomerRequest;
+import com.cosmo.authentication.user.model.request.UpdateCustomerRequest;
 import com.cosmo.authentication.user.service.CustomerService;
 import com.cosmo.common.constant.ApiConstant;
 import com.cosmo.common.model.ApiResponse;
@@ -45,5 +46,9 @@ public class CustomerController {
     @PostMapping(ApiConstant.UNBLOCK)
     public Mono<ApiResponse<?>> unblock(@RequestBody UnblockCustomerRequest request) {
         return customerService.unblockCustomer(request);
+    }
+    @PostMapping(ApiConstant.UPDATE)
+    public Mono<ApiResponse<?>> updateCustomer(@RequestBody @Valid UpdateCustomerRequest request){
+        return customerService.updateCustomer(request);
     }
 }
