@@ -18,4 +18,6 @@ public class ApiConstant {
     public static final String CHANGE_PASSWORD = "changePassword";
     public static final String CUSTOMER = "customer";
     public static final String SLOTS = "slots";
+    public static final String BLOCK = "block";
+    public static final String UNBLOCK = "unblock";
 }
