@@ -12,7 +12,8 @@ public enum StatusConstant {
 
     ACTIVE("ACTIVE", "ACTIVE"),
     PENDING("PENDING", "PENDING"),
-    DELETED("DELETED","DELETED" );
+    DELETED("DELETED","DELETED" ),
+    BLOCKED("BLOCKED","BLOCKED");
 
     private final String name;
     private final String description;
