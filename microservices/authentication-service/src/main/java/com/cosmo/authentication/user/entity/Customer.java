@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -39,9 +38,13 @@ public class Customer extends AbstractEntity implements UserDetails {
     @Column(name = "address")
     private String address;
 
-    @JoinColumn(name = "status_id", referencedColumnName = "id")
+    @JoinColumn(name = "status", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Status status;
+
+    @Column(name = "registered_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date registeredDate;
 
     @Column(name = "password_changed_date")
     @Temporal(TemporalType.TIMESTAMP)

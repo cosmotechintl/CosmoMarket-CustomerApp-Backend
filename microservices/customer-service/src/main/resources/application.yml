@@ -48,7 +48,7 @@ spring:
     # drop-first: false
 #      default-schema: public
 server:
-  port: 8091
+  port: 9091
 
 management.endpoint.health.show-details: "ALWAYS"
 management.endpoints.web.exposure.include: "*"

@@ -16,6 +16,6 @@ public class ApiConstant {
     public static final String DETAIL = "detail";
     public static final String NAVIGATION = "navigation";
     public static final String CHANGE_PASSWORD = "changePassword";
-
+    public static final String CUSTOMER = "customer";
     public static final String SLOTS = "slots";
 }

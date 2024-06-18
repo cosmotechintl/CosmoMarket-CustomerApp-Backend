@@ -12,7 +12,8 @@ CREATE TABLE IF NOT EXISTS `customer`
     email                        VARCHAR(255)          NOT NULL,
     mobile_number                VARCHAR(255)          NULL,
     address                      VARCHAR(255)          NULL,
-    status_id                    BIGINT                NOT NULL,
+    status                       BIGINT                NOT NULL,
+    registered_date              datetime              NULL,
     password_changed_date        datetime              NULL,
     last_logged_in_time          datetime              NULL,
     wrong_password_attempt_count INT                   NULL,
@@ -22,6 +23,4 @@ CREATE TABLE IF NOT EXISTS `customer`
     wrong_oto_auth_attempt_count INT                   NULL,
     CONSTRAINT pk_customer PRIMARY KEY (id)
     );
-
-
 
