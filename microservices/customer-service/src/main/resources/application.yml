@@ -47,6 +47,9 @@ spring:
     change-log: classpath:db.changelog/changelog-master.yml
     # drop-first: false
 #      default-schema: public
+
+  main:
+    allow-bean-definition-overriding: true
 server:
   port: 9091
 

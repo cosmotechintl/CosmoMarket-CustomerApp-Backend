@@ -21,4 +21,7 @@ public class ApiConstant {
     public static final String BLOCK = "block";
     public static final String UNBLOCK = "unblock";
     public static final String UPDATE = "update";
+    public static final String SIGNUP = "signUp";
+    public static final String EMAIL_TEMPLATE = "emailTemplate";
+    public static final String VERIFY = "verify";
 }
