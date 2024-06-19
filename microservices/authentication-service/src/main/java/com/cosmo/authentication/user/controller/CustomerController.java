@@ -24,7 +24,7 @@ public class CustomerController {
     private final CustomerService customerService;
 
     @PostMapping(ApiConstant.GET)
-    public Mono<ApiResponse<?>> getRegisteredCustomers(@RequestBody SearchParam searchParam) {
+    public Mono<ApiResponse<?>> getRegisteredCustomers(@RequestBody @Valid SearchParam searchParam) {
         return customerService.getRegisteredCustomers(searchParam);
     }
 
@@ -34,17 +34,17 @@ public class CustomerController {
     }
 
     @PostMapping(ApiConstant.DELETE)
-    public Mono<ApiResponse<?>> deleteCustomer(@RequestBody DeleteCustomerRequest request) {
+    public Mono<ApiResponse<?>> deleteCustomer(@RequestBody @Valid DeleteCustomerRequest request) {
         return customerService.deleteCustomer(request);
     }
 
     @PostMapping(ApiConstant.BLOCK)
-    public Mono<ApiResponse<?>> blockCustomer(@RequestBody BlockCustomerRequest request) {
+    public Mono<ApiResponse<?>> blockCustomer(@RequestBody @Valid BlockCustomerRequest request) {
         return customerService.blockCustomer(request);
     }
 
     @PostMapping(ApiConstant.UNBLOCK)
-    public Mono<ApiResponse<?>> unblock(@RequestBody UnblockCustomerRequest request) {
+    public Mono<ApiResponse<?>> unblock(@RequestBody @Valid UnblockCustomerRequest request) {
         return customerService.unblockCustomer(request);
     }
     @PostMapping(ApiConstant.UPDATE)

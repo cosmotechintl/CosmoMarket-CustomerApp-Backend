@@ -22,11 +22,11 @@ public class CustomerSearchRepositoryImpl implements CustomerSearchRepository {
 
     @Override
     public Long count(SearchParam searchParam) {
-        return (Long) em.createQuery("select COUNT(ag.id) " +
-                        "from Customer  ag " +
-                        "join Status s on s.id=ag.status.id " +
+        return (Long) em.createQuery("select COUNT(c.id) " +
+                        "from Customer  c " +
+                        "join Status s on s.id=c.status.id " +
                         " where " +
-                        "(:name is null or ag.name like CONCAT('%', :name, '%')) and " +
+                        "(:name is null or c.name like CONCAT('%', :name, '%')) and " +
                         "(:status is null or s.description=:status) ")
                 .setParameter("name", SearchParamUtil.getString(searchParam, NAME))
                 .setParameter("status", SearchParamUtil.getString(searchParam, STATUS))
@@ -35,11 +35,11 @@ public class CustomerSearchRepositoryImpl implements CustomerSearchRepository {
 
     @Override
     public List<Customer> getAll(SearchParam searchParam) {
-        return em.createQuery("select ag " +
-                        "from Customer  ag " +
-                        "join Status s on s.id=ag.status.id " +
+        return em.createQuery("select c " +
+                        "from Customer  c " +
+                        "join Status s on s.id=c.status.id " +
                         " where " +
-                        "(:name is null or ag.name like CONCAT('%', :name, '%')) and " +
+                        "(:name is null or c.name like CONCAT('%', :name, '%')) and " +
                         "(:status is null or s.description=:status) ")
                 .setParameter("name", SearchParamUtil.getString(searchParam, NAME))
                 .setParameter("status", SearchParamUtil.getString(searchParam, STATUS))

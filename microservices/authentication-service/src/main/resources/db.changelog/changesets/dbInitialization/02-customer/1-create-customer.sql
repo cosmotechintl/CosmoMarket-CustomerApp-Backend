@@ -24,3 +24,14 @@ CREATE TABLE IF NOT EXISTS `customer`
     CONSTRAINT pk_customer PRIMARY KEY (id)
     );
 
+--changeset manjul.tamang:2
+--preconditions onFail:MARK_RAN
+--precondition-sql-check expectedResult:0  SELECT COUNT(*) FROM information_schema.table_constraints WHERE constraint_schema = (SELECT DATABASE()) AND table_name = 'customer' AND constraint_name = ' uc_customer_mobile_number'
+ALTER TABLE customer
+    ADD CONSTRAINT uc_customer_mobile_number UNIQUE (mobile_number);
+
+--changeset manjul.tamang:3
+--preconditions onFail:MARK_RAN
+--precondition-sql-check expectedResult:0  SELECT COUNT(*) FROM information_schema.table_constraints WHERE constraint_schema = (SELECT DATABASE()) AND table_name = 'customer' AND constraint_name = ' uc_customer_email'
+ALTER TABLE customer
+    ADD CONSTRAINT uc_customer_email UNIQUE (email);

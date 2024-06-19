@@ -10,6 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UpdateCustomerRequest extends ModelBase {
+    @NotBlank(message = "email is required.")
     private String email;
     @NotBlank(message = "Name cannot be blank")
     private String name;

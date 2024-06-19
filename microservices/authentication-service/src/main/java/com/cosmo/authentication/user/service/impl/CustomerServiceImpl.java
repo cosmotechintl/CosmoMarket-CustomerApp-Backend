@@ -61,34 +61,34 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Mono<ApiResponse<?>> deleteCustomer(DeleteCustomerRequest deleteCustomerRequest) {
-        Optional<Customer> customer = customerRepository.findByEmail(deleteCustomerRequest.getEmail());
-        if (customer.isEmpty()) {
+        Optional<Customer> checkCustomer = customerRepository.findByEmail(deleteCustomerRequest.getEmail());
+        if (checkCustomer.isEmpty()) {
             return Mono.just(ResponseUtil.getNotFoundResponse("Customer not found"));
         } else {
-            Customer customer1 = customer.get();
-            if (StatusConstant.BLOCKED.getName().equals(customer1.getStatus().getName()) || StatusConstant.DELETED.getName().equals(customer1.getStatus().getName())) {
+            Customer customer = checkCustomer.get();
+            if (StatusConstant.BLOCKED.getName().equals(customer.getStatus().getName()) || StatusConstant.DELETED.getName().equals(customer.getStatus().getName())) {
                 return Mono.just(ResponseUtil.getNotFoundResponse("Customer not found"));
             }
-            customer1.setStatus(statusRepository.findByName(StatusConstant.DELETED.getName()));
-            customer1.setActive(false);
-            customerRepository.save(customer1);
+            customer.setStatus(statusRepository.findByName(StatusConstant.DELETED.getName()));
+            customer.setActive(false);
+            customerRepository.save(customer);
             return Mono.just(ResponseUtil.getSuccessfulApiResponse("Customer deleted successfully"));
         }
     }
 
     @Override
     public Mono<ApiResponse<?>> blockCustomer(BlockCustomerRequest blockCustomerRequest) {
-        Optional<Customer> customer = customerRepository.findByEmail(blockCustomerRequest.getEmail());
-        if (customer.isEmpty()) {
+        Optional<Customer> checkCustomer = customerRepository.findByEmail(blockCustomerRequest.getEmail());
+        if (checkCustomer.isEmpty()) {
             return Mono.just(ResponseUtil.getNotFoundResponse("Customer not found"));
         } else {
-            Customer customer1 = customer.get();
-            if (StatusConstant.DELETED.getName().equals(customer1.getStatus().getName()) || StatusConstant.BLOCKED.getName().equals(customer1.getStatus().getName())) {
+            Customer customer = checkCustomer.get();
+            if (StatusConstant.DELETED.getName().equals(customer.getStatus().getName()) || StatusConstant.BLOCKED.getName().equals(customer.getStatus().getName())) {
                 return Mono.just(ResponseUtil.getNotFoundResponse("Customer not found"));
             } else {
-                customer1.setStatus(statusRepository.findByName(StatusConstant.BLOCKED.getName()));
-                customer1.setActive(false);
-                customerRepository.save(customer1);
+                customer.setStatus(statusRepository.findByName(StatusConstant.BLOCKED.getName()));
+                customer.setActive(false);
+                customerRepository.save(customer);
                 return Mono.just(ResponseUtil.getSuccessfulApiResponse("Customer blocked successfully"));
             }
         }
@@ -96,13 +96,15 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Mono<ApiResponse<?>> unblockCustomer(UnblockCustomerRequest unblockCustomerRequest) {
-        Optional<Customer> customer = customerRepository.findByEmail(unblockCustomerRequest.getEmail());
-        Customer customer1 = customer.get();
-        if (StatusConstant.BLOCKED.getName().equals(customer1.getStatus().getName())) {
-            customer1.setStatus(statusRepository.findByName(StatusConstant.ACTIVE.getName()));
-            customer1.setActive(true);
-            customerRepository.save(customer1);
-            return Mono.just(ResponseUtil.getSuccessfulApiResponse("Customer unblocked successfully"));
+        Optional<Customer> checkCustomer = customerRepository.findByEmail(unblockCustomerRequest.getEmail());
+        if(checkCustomer.isPresent()){
+            Customer customer = checkCustomer.get();
+            if (StatusConstant.BLOCKED.getName().equals(customer.getStatus().getName())) {
+                customer.setStatus(statusRepository.findByName(StatusConstant.ACTIVE.getName()));
+                customer.setActive(true);
+                customerRepository.save(customer);
+                return Mono.just(ResponseUtil.getSuccessfulApiResponse("Customer unblocked successfully"));
+        }
         }
         return Mono.just(ResponseUtil.getFailureResponse("Customer unblock failed"));
     }
@@ -113,15 +115,17 @@ public class CustomerServiceImpl implements CustomerService {
         if (existedNumber.isPresent() && !existedNumber.get().getEmail().equals(updateCustomerRequest.getEmail())) {
             return Mono.just(ResponseUtil.getFailureResponse("The mobile number is linked to another account."));
         }
-        Optional<Customer> customer = customerRepository.findByEmail(updateCustomerRequest.getEmail());
-        Customer customer1 = customer.get();
-        if (StatusConstant.BLOCKED.getName().equals(customer1.getStatus().getName()) || StatusConstant.DELETED.getName().equals(customer1.getStatus().getName())) {
-            return Mono.just(ResponseUtil.getNotFoundResponse("Customer not found"));
-        } else {
-            Customer updatedCustomer = customerMapper.updateCustomer(updateCustomerRequest, customer1);
-            customerRepository.save(updatedCustomer);
-            return Mono.just(ResponseUtil.getSuccessfulApiResponse("Customer updated successfully"));
+        Optional<Customer> checkCustomer = customerRepository.findByEmail(updateCustomerRequest.getEmail());
+        if (checkCustomer.isPresent()){
+            Customer customer = checkCustomer.get();
+            if (StatusConstant.BLOCKED.getName().equals(customer.getStatus().getName()) || StatusConstant.DELETED.getName().equals(customer.getStatus().getName())) {
+                return Mono.just(ResponseUtil.getNotFoundResponse("Customer not found"));
+            } else {
+                Customer updatedCustomer = customerMapper.updateCustomer(updateCustomerRequest, customer);
+                customerRepository.save(updatedCustomer);
         }
+        }
+        return Mono.just(ResponseUtil.getSuccessfulApiResponse("Customer updated successfully"));
     }
 }
 
