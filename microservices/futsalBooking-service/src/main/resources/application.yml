@@ -1,0 +1,54 @@
+spring:
+  application:
+    name: futsalBooking-service
+  #  profiles.active: develop
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 5MB
+      enabled: true
+  h2:
+    console:
+      enabled: true
+      path: /console
+      settings:
+        trace: false
+        web-allow-others: false
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    database: MYSQL
+    generate-ddl: false
+    show-sql: false
+    hibernate:
+      ddl-auto: none
+      hibernate.connection.CharSet: utf8
+      hibernate.connection.characterEncoding: utf8
+      hibernate.connection.useUnicode: true
+      globally_quoted_identifiers: true
+    properties:
+      hibernate.cache.use_second_level_cache: false
+      hibernate.cache.use_query_cache: false
+      hibernate.generate_statistics: false
+      hibernate.show_sql: false
+      hibernate.format_sql: false
+      hibernate.jdbc.batch_size: 500
+      hibernate.order_inserts: true
+      hibernate.order_updates: true
+  datasource:
+    databaseDriverName: com.mysql.cj.jdbc.Driver
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    maxPool: 5
+    maxIdle: 4
+    minIdle: 0
+  liquibase:
+    enabled: true
+    change-log: classpath:booking-db.changelog/changelog-master.yml
+    # drop-first: false
+#      default-schema: public
+server:
+  port: 9092
+
+management.endpoint.health.show-details: "ALWAYS"
+management.endpoints.web.exposure.include: "*"
