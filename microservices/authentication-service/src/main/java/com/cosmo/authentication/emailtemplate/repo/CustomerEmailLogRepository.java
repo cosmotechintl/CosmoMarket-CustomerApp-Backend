@@ -11,4 +11,6 @@ public interface CustomerEmailLogRepository extends JpaRepository<CustomerEmailL
     boolean existsByOtp(String otp);
 
     Optional<CustomerEmailLog> findByEmail(String email);
+
+    CustomerEmailLog findByOtp(String otp);
 }
