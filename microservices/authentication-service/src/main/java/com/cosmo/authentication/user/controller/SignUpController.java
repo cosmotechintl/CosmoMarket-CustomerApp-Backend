@@ -1,11 +1,11 @@
-package com.cosmo.customerService.signup.controller;
+package com.cosmo.authentication.user.controller;
 
 import com.cosmo.authentication.emailtemplate.model.CreateCustomerEmailLog;
+import com.cosmo.authentication.user.service.SignUpService;
 import com.cosmo.common.constant.ApiConstant;
 import com.cosmo.common.model.ApiResponse;
-import com.cosmo.customerService.signup.model.OTPVerificationModel;
-import com.cosmo.customerService.signup.model.SignUpModel;
-import com.cosmo.customerService.signup.service.SignUpService;
+import com.cosmo.authentication.user.model.OTPVerificationModel;
+import com.cosmo.authentication.user.model.SignUpModel;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;

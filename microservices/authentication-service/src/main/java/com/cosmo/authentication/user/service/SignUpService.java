@@ -1,9 +1,9 @@
-package com.cosmo.customerService.signup.service;
+package com.cosmo.authentication.user.service;
 
 import com.cosmo.authentication.emailtemplate.model.CreateCustomerEmailLog;
 import com.cosmo.common.model.ApiResponse;
-import com.cosmo.customerService.signup.model.OTPVerificationModel;
-import com.cosmo.customerService.signup.model.SignUpModel;
+import com.cosmo.authentication.user.model.OTPVerificationModel;
+import com.cosmo.authentication.user.model.SignUpModel;
 import reactor.core.publisher.Mono;
 
 public interface SignUpService {

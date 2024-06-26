@@ -1,12 +1,16 @@
 package com.cosmo.authentication.user.entity;
 
 import com.cosmo.common.abstractEntity.AbstractEntity;
+import com.cosmo.common.entity.BloodGroup;
+import com.cosmo.common.entity.Gender;
 import com.cosmo.common.entity.Status;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -17,23 +21,37 @@ import java.util.List;
 @Table(name = "customer")
 public class Customer extends AbstractEntity implements UserDetails {
 
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
 
-    @Column(name = "password")
-    private String password;
-
-    @Column(name = "username", nullable = false)
-    private String username;
-
-    @Column(name = "is_active")
-    private boolean isActive;
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
 
     @Column(name = "email", nullable = false)
     private String email;
 
     @Column(name = "mobile_number")
     private String mobileNumber;
+
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "username")
+    private String username;
+
+    @Column(name="date_of_birth", nullable = false)
+    private LocalDate dateOfBirth;
+
+    @JoinColumn(name = "gender", referencedColumnName = "id")
+    @ManyToOne
+    private Gender gender;
+
+    @JoinColumn(name = "blood_group", referencedColumnName = "id")
+    @ManyToOne
+    private BloodGroup bloodGroup;
+
+    @Column(name = "is_active")
+    private boolean isActive;
 
     @Column(name = "address")
     private String address;

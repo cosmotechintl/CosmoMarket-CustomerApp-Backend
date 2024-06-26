@@ -1,4 +1,4 @@
-package com.cosmo.customerService.signup.model;
+package com.cosmo.authentication.user.model;
 
 import com.cosmo.common.model.ModelBase;
 import lombok.Getter;

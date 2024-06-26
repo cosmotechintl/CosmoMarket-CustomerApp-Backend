@@ -22,12 +22,6 @@ public class OtpUtil {
         do {
             otp = String.valueOf(100000 + random.nextInt(900000));
         } while (isValidOTP(otp));
-        LocalDateTime timestamp = LocalDateTime.now();
-
-        CustomerEmailLog customerEmailLog = new CustomerEmailLog();
-        customerEmailLog.setOtp(otp);
-        customerEmailLog.setTimestamp(timestamp);
-        customerEmailLogRepository.save(customerEmailLog);
         return otp;
     }
 
