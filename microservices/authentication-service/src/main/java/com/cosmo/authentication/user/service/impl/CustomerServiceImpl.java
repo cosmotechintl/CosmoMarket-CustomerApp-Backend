@@ -97,14 +97,14 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Mono<ApiResponse<?>> unblockCustomer(UnblockCustomerRequest unblockCustomerRequest) {
         Optional<Customer> checkCustomer = customerRepository.findByEmail(unblockCustomerRequest.getEmail());
-        if(checkCustomer.isPresent()){
+        if (checkCustomer.isPresent()) {
             Customer customer = checkCustomer.get();
             if (StatusConstant.BLOCKED.getName().equals(customer.getStatus().getName())) {
                 customer.setStatus(statusRepository.findByName(StatusConstant.ACTIVE.getName()));
                 customer.setActive(true);
                 customerRepository.save(customer);
                 return Mono.just(ResponseUtil.getSuccessfulApiResponse("Customer unblocked successfully"));
-        }
+            }
         }
         return Mono.just(ResponseUtil.getFailureResponse("Customer unblock failed"));
     }
@@ -116,14 +116,14 @@ public class CustomerServiceImpl implements CustomerService {
             return Mono.just(ResponseUtil.getFailureResponse("The mobile number is linked to another account."));
         }
         Optional<Customer> checkCustomer = customerRepository.findByEmail(updateCustomerRequest.getEmail());
-        if (checkCustomer.isPresent()){
+        if (checkCustomer.isPresent()) {
             Customer customer = checkCustomer.get();
             if (StatusConstant.BLOCKED.getName().equals(customer.getStatus().getName()) || StatusConstant.DELETED.getName().equals(customer.getStatus().getName())) {
                 return Mono.just(ResponseUtil.getNotFoundResponse("Customer not found"));
             } else {
                 Customer updatedCustomer = customerMapper.updateCustomer(updateCustomerRequest, customer);
                 customerRepository.save(updatedCustomer);
-        }
+            }
         }
         return Mono.just(ResponseUtil.getSuccessfulApiResponse("Customer updated successfully"));
     }
