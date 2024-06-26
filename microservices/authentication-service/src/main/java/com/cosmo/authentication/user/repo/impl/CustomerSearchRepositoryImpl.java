@@ -10,8 +10,8 @@ import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import java.util.List;
-import static com.cosmo.common.constant.SearchParamConstant.NAME;
-import static com.cosmo.common.constant.SearchParamConstant.STATUS;
+
+import static com.cosmo.common.constant.SearchParamConstant.*;
 
 @Repository
 @RequiredArgsConstructor
@@ -26,9 +26,11 @@ public class CustomerSearchRepositoryImpl implements CustomerSearchRepository {
                         "from Customer  c " +
                         "join Status s on s.id=c.status.id " +
                         " where " +
-                        "(:name is null or c.name like CONCAT('%', :name, '%')) and " +
+                        "(:firstName is null or c.firstName like CONCAT('%', :firstName, '%')) and " +
+                        "(:lastName is null or c.lastName like CONCAT('%', :lastName, '%')) and " +
                         "(:status is null or s.description=:status) ")
-                .setParameter("name", SearchParamUtil.getString(searchParam, NAME))
+                .setParameter("firstName", SearchParamUtil.getString(searchParam, FIRST_NAME))
+                .setParameter("lastName", SearchParamUtil.getString(searchParam, LAST_NAME))
                 .setParameter("status", SearchParamUtil.getString(searchParam, STATUS))
                 .getSingleResult();
     }
@@ -39,9 +41,11 @@ public class CustomerSearchRepositoryImpl implements CustomerSearchRepository {
                         "from Customer  c " +
                         "join Status s on s.id=c.status.id " +
                         " where " +
-                        "(:name is null or c.name like CONCAT('%', :name, '%')) and " +
+                        "(:firstName is null or c.firstName like CONCAT('%', :firstName, '%')) and " +
+                        "(:lastName is null or c.lastName like CONCAT('%', :lastName, '%')) and " +
                         "(:status is null or s.description=:status) ")
-                .setParameter("name", SearchParamUtil.getString(searchParam, NAME))
+                .setParameter("firstName", SearchParamUtil.getString(searchParam,FIRST_NAME))
+                .setParameter("lastName", SearchParamUtil.getString(searchParam,LAST_NAME))
                 .setParameter("status", SearchParamUtil.getString(searchParam, STATUS))
                 .getResultList();
     }
