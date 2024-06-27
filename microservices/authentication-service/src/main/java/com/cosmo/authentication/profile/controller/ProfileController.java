@@ -1,5 +1,6 @@
 package com.cosmo.authentication.profile.controller;
 
+import com.cosmo.authentication.profile.model.request.ChangeEmailRequest;
 import com.cosmo.authentication.profile.model.request.ChangePasswordRequest;
 import com.cosmo.authentication.profile.model.request.EditProfileRequest;
 import com.cosmo.authentication.profile.service.ProfileService;
@@ -28,5 +29,9 @@ public class ProfileController {
     @PostMapping(ApiConstant.UPDATE)
     public Mono<ApiResponse<?>> editProfile(@RequestBody @Valid EditProfileRequest editProfileRequest, Principal connectedUser){
         return profileService.editProfile(editProfileRequest, connectedUser);
+    }
+    @PostMapping(ApiConstant.CHANGE_EMAIL)
+    public Mono<ApiResponse<?>> changeEmail(@RequestBody @Valid ChangeEmailRequest changeEmailRequest, Principal connectedUser){
+        return profileService.changeEmail(changeEmailRequest, connectedUser);
     }
 }

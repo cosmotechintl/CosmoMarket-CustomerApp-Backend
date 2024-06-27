@@ -26,4 +26,7 @@ public class ApiConstant {
     public static final String VERIFY = "verify";
     public static final String PROFILE = "profile";
     public static final String VIEW = "view";
+    public static  final String CHANGE_EMAIL ="changeEmail";
+    public static final String ACCOUNT_RECOVERY = "accountRecovery";
+    public static final String FIND_MY_ACCOUNT = "findMyAccount";
 }

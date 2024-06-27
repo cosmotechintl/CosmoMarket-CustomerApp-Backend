@@ -2,6 +2,7 @@ package com.cosmo.authentication.profile.service.impl;
 
 import com.cosmo.authentication.profile.mapper.CustomerProfileMapper;
 import com.cosmo.authentication.profile.model.CustomerProfileDetailModel;
+import com.cosmo.authentication.profile.model.request.ChangeEmailRequest;
 import com.cosmo.authentication.profile.model.request.ChangePasswordRequest;
 import com.cosmo.authentication.profile.model.request.EditProfileRequest;
 import com.cosmo.authentication.profile.service.ProfileService;
@@ -57,5 +58,18 @@ public class ProfileServiceImpl implements ProfileService {
         Customer updatingCustomer = customerProfileMapper.editCustomerProfile(editProfileRequest, customer);
         customerRepository.save(updatingCustomer);
         return Mono.just(ResponseUtil.getSuccessfulApiResponse("Profile updated successfully"));
+    }
+
+    @Override
+    public Mono<ApiResponse<?>> changeEmail(ChangeEmailRequest changeEmailRequest, Principal connectedUser) {
+        var customer = ((Customer) ((UsernamePasswordAuthenticationToken) connectedUser).getPrincipal());
+        if(!passwordEncoder.matches(changeEmailRequest.getPassword(),customer.getPassword())){
+            return Mono.just(ResponseUtil.getFailureResponse("The password you have entered is incorrect"));
+        }
+        else{
+            Customer updatingCustomer = customerProfileMapper.changeEmail(changeEmailRequest, customer);
+            customerRepository.save(updatingCustomer);
+            return Mono.just(ResponseUtil.getSuccessfulApiResponse("Email changed successfully"));
+        }
     }
 }

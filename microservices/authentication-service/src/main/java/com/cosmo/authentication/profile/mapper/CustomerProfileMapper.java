@@ -1,6 +1,7 @@
 package com.cosmo.authentication.profile.mapper;
 
 import com.cosmo.authentication.profile.model.CustomerProfileDetailModel;
+import com.cosmo.authentication.profile.model.request.ChangeEmailRequest;
 import com.cosmo.authentication.profile.model.request.EditProfileRequest;
 import com.cosmo.authentication.user.entity.Customer;
 import com.cosmo.common.repository.BloodGroupRepository;
@@ -22,6 +23,10 @@ public abstract class CustomerProfileMapper {
         customer.setProfilePictureName(editProfileRequest.getProfilePictureName());
         customer.setUsername(editProfileRequest.getUsername());
         customer.setDateOfBirth(editProfileRequest.getDateOfBirth());
+        return customer;
+    }
+    public Customer changeEmail(ChangeEmailRequest changeEmailRequest, Customer customer){
+        customer.setEmail(changeEmailRequest.getEmail());
         return customer;
     }
 }
