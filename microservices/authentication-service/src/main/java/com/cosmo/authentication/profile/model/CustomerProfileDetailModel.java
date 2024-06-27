@@ -1,6 +1,7 @@
 package com.cosmo.authentication.profile.model;
 
 import com.cosmo.common.entity.Gender;
+import com.cosmo.common.model.BloodGroupDto;
 import com.cosmo.common.model.GenderDto;
 import com.cosmo.common.model.ModelBase;
 import lombok.Getter;
@@ -16,6 +17,7 @@ public class CustomerProfileDetailModel extends ModelBase {
     private String mobileNumber;
     private String address;
     private GenderDto gender;
+    private BloodGroupDto bloodGroup;
     private String profilePictureName;
     private String dateOfBirth;
 }

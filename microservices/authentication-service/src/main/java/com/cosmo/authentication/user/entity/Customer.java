@@ -4,6 +4,7 @@ import com.cosmo.common.abstractEntity.AbstractEntity;
 import com.cosmo.common.entity.BloodGroup;
 import com.cosmo.common.entity.Gender;
 import com.cosmo.common.entity.Status;
+import com.cosmo.common.model.GenderDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

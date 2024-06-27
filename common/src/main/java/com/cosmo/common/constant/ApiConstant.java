@@ -24,5 +24,6 @@ public class ApiConstant {
     public static final String SIGNUP = "signUp";
     public static final String EMAIL_TEMPLATE = "emailTemplate";
     public static final String VERIFY = "verify";
-    public static final String VIEW_PROFILE= "viewProfile";
+    public static final String PROFILE = "profile";
+    public static final String VIEW = "view";
 }
