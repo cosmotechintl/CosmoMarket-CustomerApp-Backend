@@ -1,5 +1,6 @@
 package com.cosmo.authentication.emailtemplate.mapper;
 
+import com.cosmo.authentication.core.constant.EmailTemplateConstant;
 import com.cosmo.authentication.emailtemplate.entity.CustomerEmailLog;
 import com.cosmo.authentication.emailtemplate.model.CreateCustomerEmailLog;
 import com.cosmo.authentication.emailtemplate.repo.CustomerEmailLogRepository;
@@ -35,8 +36,8 @@ public abstract class CustomerEmailLogMapper {
 
     public CustomerEmailLog mapToEntity(Customer customer){
 
-        String otp = otpUtil.generateAndSaveOTP();
-        String emailContent = emailContentUtil.prepareEmailContent(customer.getFirstName(), otp);
+        String otp = otpUtil.generateRegistrationOTP();
+        String emailContent = emailContentUtil.prepareEmailContent(customer.getFirstName(), otp, EmailTemplateConstant.MAIL_VERIFICATION);
 
         CustomerEmailLog customerEmailLog = new CustomerEmailLog();
         customerEmailLog.setEmail(customer.getEmail());

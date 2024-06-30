@@ -20,8 +20,8 @@ public class EmailContentUtil {
     @Autowired
     private freemarker.template.Configuration freeMarkerConfig;
 
-    public String prepareEmailContent(String customerName, String otp) {
-        EmailTemplate emailTemplate = emailTemplateRepository.findEmailTemplateByName(EmailTemplateConstant.MAIL_VERIFICATION);
+    public String prepareEmailContent(String customerName, String otp, String templateName) {
+        EmailTemplate emailTemplate = emailTemplateRepository.findEmailTemplateByName(templateName);
         Map<String, Object> model = new HashMap<>();
         model.put(FreeMarkerTemplateConstant.USERNAME, customerName);
         model.put(FreeMarkerTemplateConstant.OTP, otp);
