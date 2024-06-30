@@ -2,6 +2,8 @@ package com.cosmo.authentication.user.model;
 
 import com.cosmo.common.entity.BloodGroup;
 import com.cosmo.common.entity.Gender;
+import com.cosmo.common.model.BloodGroupDto;
+import com.cosmo.common.model.GenderDto;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -29,7 +31,7 @@ public class SignUpModel {
     @NotNull(message = "Date of birth is required.")
     private LocalDate dob;
     @NotNull(message="Gender is required")
-    private Gender gender;
+    private GenderDto gender;
     @NotNull(message="Blood group is required")
-    private BloodGroup bloodGroup;
+    private BloodGroupDto bloodGroup;
 }

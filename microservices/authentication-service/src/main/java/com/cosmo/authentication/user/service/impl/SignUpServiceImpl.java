@@ -71,7 +71,7 @@ public class SignUpServiceImpl implements SignUpService {
 
     @Override
     public Mono<ApiResponse> verify(OTPVerificationModel otpVerificationModel) {
-        if (otpUtil.isValidOTP(otpVerificationModel.getOtp())) {
+        if (otpUtil.isValidRegistrationOTP(otpVerificationModel.getOtp())) {
             Optional<Customer> customerOptional = customerRepository.findByEmail(otpVerificationModel.getEmail());
             if (customerOptional.isPresent()) {
                 Customer customer = customerOptional.get();
@@ -83,4 +83,5 @@ public class SignUpServiceImpl implements SignUpService {
             return Mono.just(ResponseUtil.getFailureResponse("OTP verification failed. OTP is incorrect or has expired."));
         }
     }
+
 }

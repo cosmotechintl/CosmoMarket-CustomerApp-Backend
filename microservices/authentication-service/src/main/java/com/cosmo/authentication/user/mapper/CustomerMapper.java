@@ -41,6 +41,7 @@ public abstract class CustomerMapper {
         customer.setLastName(signUpModel.getLastName());
         customer.setMobileNumber(signUpModel.getMobileNumber());
         customer.setEmail(signUpModel.getEmail());
+        customer.setUsername(signUpModel.getEmail());
         customer.setPassword(passwordEncoder.encode(signUpModel.getPassword()));
         customer.setDateOfBirth(signUpModel.getDob());
         customer.setGender(genderRepository.findByName(signUpModel.getGender().getName()));
