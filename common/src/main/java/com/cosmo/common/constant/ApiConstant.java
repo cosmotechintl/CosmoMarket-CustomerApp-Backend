@@ -31,4 +31,5 @@ public class ApiConstant {
     public static final String FIND_MY_ACCOUNT = "findMyAccount";
     public static final String VERIFY_OTP = "verifyOtp";
     public static final String SET_PASSWORD = "setPassword";
+    public static final String FUTSAL = "futsal";
 }
