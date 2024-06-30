@@ -9,5 +9,6 @@ import org.springframework.stereotype.Component;
 public class PropertiesFileValue {
 
     @Value("${futsal_service.url}")
-    private String vendorServiceUrl;
+    private String futsalServiceUrl;
+
 }

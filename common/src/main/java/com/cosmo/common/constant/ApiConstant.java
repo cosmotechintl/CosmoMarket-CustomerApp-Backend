@@ -29,4 +29,5 @@ public class ApiConstant {
     public static  final String CHANGE_EMAIL ="changeEmail";
     public static final String ACCOUNT_RECOVERY = "accountRecovery";
     public static final String FIND_MY_ACCOUNT = "findMyAccount";
+    public static final String FUTSAL = "futsal";
 }
