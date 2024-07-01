@@ -4,6 +4,7 @@ import com.cosmo.authentication.emailtemplate.entity.CustomerEmailLog;
 import com.cosmo.authentication.emailtemplate.repo.CustomerEmailLogRepository;
 import com.cosmo.authentication.recovery.entity.AccountRecoveryEmailLog;
 import com.cosmo.authentication.recovery.repo.AccountRecoveryEmailLogRepository;
+import com.cosmo.common.exception.ConflictException;
 import com.cosmo.common.exception.NotFoundException;
 import com.cosmo.common.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,13 @@ public class OtpUtil {
     public String generateRegistrationOTP() {
         Random random = new Random();
         String otp;
+        int counter = 0;
         do {
             otp = String.valueOf(100000 + random.nextInt(900000));
+            counter++;
+            if (counter == 800000){
+                throw new ConflictException("Cannot generate OTP now. Please Try again later");
+            }
         } while (isValidRegistrationOTP(otp));
         return otp;
     }
@@ -39,6 +45,7 @@ public class OtpUtil {
         LocalDateTime now = LocalDateTime.now();
         long minutesDifference = ChronoUnit.MINUTES.between(otpTimestamp, now);
         return minutesDifference <= 2;
+
     }
 
     public String generateAccountRecoveryOTP() {
@@ -46,7 +53,7 @@ public class OtpUtil {
         String otp;
         do {
             otp = String.valueOf(100000 + random.nextInt(900000));
-        } while (isValidRegistrationOTP(otp));
+        } while (isValidAccountRecoveryOTP(otp));
         return otp;
     }
 
