@@ -2,6 +2,8 @@ package com.cosmo.authentication.util;
 
 import com.cosmo.authentication.emailtemplate.entity.CustomerEmailLog;
 import com.cosmo.authentication.emailtemplate.repo.CustomerEmailLogRepository;
+import com.cosmo.authentication.profile.entity.ChangeEmailLog;
+import com.cosmo.authentication.profile.repo.ChangeEmailLogRepository;
 import com.cosmo.authentication.recovery.entity.AccountRecoveryEmailLog;
 import com.cosmo.authentication.recovery.repo.AccountRecoveryEmailLogRepository;
 import com.cosmo.common.exception.ConflictException;
@@ -20,6 +22,8 @@ public class OtpUtil {
     private CustomerEmailLogRepository customerEmailLogRepository;
     @Autowired
     private AccountRecoveryEmailLogRepository accountRecoveryEmailLogRepository;
+    @Autowired
+    private ChangeEmailLogRepository changeEmailLogRepository;
 
     public String generateRegistrationOTP() {
         Random random = new Random();
@@ -47,7 +51,7 @@ public class OtpUtil {
         return minutesDifference <= 2;
 
     }
-
+    // Otp for Account Recovery
     public String generateAccountRecoveryOTP() {
         Random random = new Random();
         String otp;
@@ -68,5 +72,25 @@ public class OtpUtil {
         long minutesDifference = ChronoUnit.MINUTES.between(otpTimestamp, now);
         return minutesDifference <= 2;
     }
+    //Otp for change email
+    public String generateEmailChangeOTP() {
+        Random random = new Random();
+        String otp;
+        do {
+            otp = String.valueOf(100000 + random.nextInt(900000));
+        } while (isValidChangeEmailOtp(otp));
+        return otp;
+    }
 
+    public boolean isValidChangeEmailOtp(String otp) {
+        ChangeEmailLog changeEmailLog = changeEmailLogRepository.findByOtp(otp);
+        if (changeEmailLog == null) {
+            return false;
+        }
+
+        LocalDateTime otpTimestamp = changeEmailLog.getTimestamp();
+        LocalDateTime now = LocalDateTime.now();
+        long minutesDifference = ChronoUnit.MINUTES.between(otpTimestamp, now);
+        return minutesDifference <= 2;
+    }
 }

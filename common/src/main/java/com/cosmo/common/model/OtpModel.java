@@ -1,6 +1,5 @@
-package com.cosmo.authentication.recovery.model;
+package com.cosmo.common.model;
 
-import com.cosmo.common.model.ModelBase;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;

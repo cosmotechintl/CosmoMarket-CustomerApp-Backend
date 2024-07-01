@@ -76,6 +76,7 @@ public class SignUpServiceImpl implements SignUpService {
             if (customerOptional.isPresent()) {
                 Customer customer = customerOptional.get();
                 customer.setStatus(statusRepository.findByName(StatusConstant.ACTIVE.getName()));
+                customer.setActive(true);
                 customerRepository.save(customer);
             }
             return Mono.just(ResponseUtil.getSuccessfulApiResponse("OTP verification successful."));
