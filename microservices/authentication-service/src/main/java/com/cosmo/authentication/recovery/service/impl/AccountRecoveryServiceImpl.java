@@ -5,7 +5,6 @@ import com.cosmo.authentication.core.service.MailService;
 import com.cosmo.authentication.emailtemplate.model.request.SendEmailRequest;
 import com.cosmo.authentication.recovery.entity.AccountRecoveryEmailLog;
 import com.cosmo.authentication.recovery.mapper.AccountRecoveryMapper;
-import com.cosmo.authentication.recovery.model.OtpModel;
 import com.cosmo.authentication.recovery.model.request.FindMyAccountRequest;
 import com.cosmo.authentication.recovery.model.request.ForgotPasswordChangeRequest;
 import com.cosmo.authentication.recovery.repo.AccountRecoveryEmailLogRepository;
@@ -14,6 +13,7 @@ import com.cosmo.authentication.user.entity.Customer;
 import com.cosmo.authentication.user.repo.CustomerRepository;
 import com.cosmo.authentication.util.OtpUtil;
 import com.cosmo.common.model.ApiResponse;
+import com.cosmo.common.model.OtpModel;
 import com.cosmo.common.util.ResponseUtil;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -48,7 +48,7 @@ public class AccountRecoveryServiceImpl implements AccountRecoveryService {
 
                 SendEmailRequest sendEmailRequest = new SendEmailRequest();
                 sendEmailRequest.setRecipient(customer.getEmail());
-                sendEmailRequest.setSubject(EmailSubjectConstant.EMAIL_VERIFICATION);
+                sendEmailRequest.setSubject(EmailSubjectConstant.FORGET_PASSWORD_REQUEST);
                 sendEmailRequest.setMessage(accountRecoveryEmailLog.getMessage());
                 mailService.sendEmail(sendEmailRequest);
                 return Mono.just(ResponseUtil.getSuccessfulApiResponse("A verification mail has been sent to your email."));

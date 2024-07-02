@@ -6,6 +6,7 @@ import com.cosmo.authentication.profile.model.request.EditProfileRequest;
 import com.cosmo.authentication.profile.service.ProfileService;
 import com.cosmo.common.constant.ApiConstant;
 import com.cosmo.common.model.ApiResponse;
+import com.cosmo.common.model.OtpModel;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -33,5 +34,9 @@ public class ProfileController {
     @PostMapping(ApiConstant.CHANGE_EMAIL)
     public Mono<ApiResponse<?>> changeEmail(@RequestBody @Valid ChangeEmailRequest changeEmailRequest, Principal connectedUser){
         return profileService.changeEmail(changeEmailRequest, connectedUser);
+    }
+    @PostMapping(ApiConstant.SET_EMAIL)
+    public Mono<ApiResponse<?>> setEmail(@RequestBody @Valid OtpModel otpModel, Principal connectedUser){
+        return profileService.verifyOtpAndSetEmail(otpModel, connectedUser);
     }
 }
