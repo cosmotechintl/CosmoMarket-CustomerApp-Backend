@@ -2,6 +2,8 @@ package com.cosmo.authentication.user.model;
 
 import com.cosmo.common.entity.BloodGroup;
 import com.cosmo.common.entity.Gender;
+import com.cosmo.common.model.BloodGroupDto;
+import com.cosmo.common.model.GenderDto;
 import com.cosmo.common.model.ModelBase;
 import com.cosmo.common.model.StatusDto;
 import lombok.Getter;
@@ -18,7 +20,7 @@ public class SearchCustomerResponse extends ModelBase {
     private String email;
     private Date registeredDate;
     private StatusDto status;
-    private BloodGroup bloodGroup;
-    private Gender gender;
+    private BloodGroupDto bloodGroup;
+    private GenderDto gender;
     private String dateOfBirth;
 }
