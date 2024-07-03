@@ -10,6 +10,8 @@ public class PropertiesFileValue {
 
     @Value("${futsal_service.url}")
     private String futsalServiceUrl;
+    @Value("${Services_service.url}")
+    private String ServicesServiceUrl;
 
     @Value("${vendor_service.url}")
     private String vendorServiceUrl;
