@@ -34,4 +34,6 @@ public class ApiConstant {
     public static final String FUTSAL = "futsal";
     public static final String COURT = "court";
     public static final String SET_EMAIL ="setEmail";
+    public static final String SERVICES = "services";
+    public static final String GET_ALL_SERVICES = "getAllServices";
 }
