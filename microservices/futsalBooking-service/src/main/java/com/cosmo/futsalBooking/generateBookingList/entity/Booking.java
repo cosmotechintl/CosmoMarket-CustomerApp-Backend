@@ -20,8 +20,8 @@ import java.time.format.DateTimeFormatter;
 @Entity
 @Table(name = "booking")
 public class Booking extends AbstractEntity {
-    @Column(name = "vendor_id")
-    private Long vendorId;
+    @Column(name = "vendor_code")
+    private String vendorCode;
 
     @Column(name = "customer_name")
     private String customerName;

@@ -8,8 +8,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class BusinessHourDetailModel {
-    private Long vendorId;
+public class BusinessHour extends ModelBase {
+    private String vendorCode;
     private String day;
     private String startTime;
     private String endTime;
