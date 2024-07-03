@@ -1,4 +1,4 @@
-package com.cosmo.futsalBooking.futsalCourt.model;
+package com.cosmo.futsalBooking.futsal.model;
 
 import com.cosmo.common.model.ModelBase;
 import jakarta.validation.constraints.NotBlank;
@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class FetchCourtByVendorCode extends ModelBase {
+public class FetchFutsalByVendor extends ModelBase {
     @NotBlank(message = "Vendor code cannot be blank")
     private String vendorCode;
 }
