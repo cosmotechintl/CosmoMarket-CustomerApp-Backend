@@ -20,7 +20,7 @@ import reactor.core.publisher.Mono;
 public class FutsalController {
     private final FutsalService futsalService;
     @PostMapping(ApiConstant.GET+ApiConstant.SLASH+ApiConstant.DETAIL)
-    public Mono<ApiResponse<Object>> getCustomerDetails(@RequestBody @Valid FetchFutsalDetail fetchFutsalDetail){
+    public Mono<ApiResponse<Object>> getFutsalDetails(@RequestBody @Valid FetchFutsalDetail fetchFutsalDetail){
         return futsalService.getFutsalDetails(fetchFutsalDetail);
     }
 

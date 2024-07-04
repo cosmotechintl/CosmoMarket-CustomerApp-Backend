@@ -1,7 +1,7 @@
 -- liquibase formatted sql
 -- changeset amritkthapa:1
 -- preconditions onFail:CONTINUE onError:HALT
-CREATE TABLE IF NOT EXISTS booking (
+CREATE TABLE IF NOT EXISTS futsal_booking (
     id              BIGINT AUTO_INCREMENT   NOT NULL,
     version         BIGINT                  NOT NULL,
     vendor_code     VARCHAR(255)            NOT NULL,

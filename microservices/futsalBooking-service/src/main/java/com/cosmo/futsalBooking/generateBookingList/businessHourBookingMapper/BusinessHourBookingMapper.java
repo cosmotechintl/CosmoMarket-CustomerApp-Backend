@@ -1,8 +1,8 @@
 package com.cosmo.futsalBooking.generateBookingList.businessHourBookingMapper;
 
-import com.cosmo.futsalBooking.generateBookingList.entity.Booking;
+import com.cosmo.futsalBooking.generateBookingList.entity.FutsalBooking;
 import com.cosmo.futsalBooking.generateBookingList.model.BusinessHour;
-import com.cosmo.futsalBooking.generateBookingList.repo.BookingRepository;
+import com.cosmo.futsalBooking.generateBookingList.repo.FutsalBookingRepository;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.ReportingPolicy;
@@ -15,16 +15,16 @@ import java.time.LocalTime;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING)
 public abstract class BusinessHourBookingMapper {
     @Autowired
-    private BookingRepository bookingRepository;
-    public Booking toBookingModel(BusinessHour businessHour, LocalTime startTime, int daysInFuture) {
-        Booking booking = new Booking();
-        booking.setVendorCode(businessHour.getVendorCode());
-        booking.setDate(findNearestDate(businessHour.getDay(), daysInFuture));
-        booking.setStartTime(startTime);
-        booking.setEndTime(startTime.plusHours(1));
-        booking.setIsBooked(false);
-        booking.calculateAndSetAmount();
-        return booking;
+    private FutsalBookingRepository futsalBookingRepository;
+    public FutsalBooking toBookingModel(BusinessHour businessHour, LocalTime startTime, int daysInFuture) {
+        FutsalBooking futsalBooking = new FutsalBooking();
+        futsalBooking.setVendorCode(businessHour.getVendorCode());
+        futsalBooking.setDate(findNearestDate(businessHour.getDay(), daysInFuture));
+        futsalBooking.setStartTime(startTime);
+        futsalBooking.setEndTime(startTime.plusHours(1));
+        futsalBooking.setIsBooked(false);
+        futsalBooking.calculateAndSetAmount();
+        return futsalBooking;
     }
 
     private LocalDate findNearestDate(String dayOfWeekStr, int daysInFuture) {

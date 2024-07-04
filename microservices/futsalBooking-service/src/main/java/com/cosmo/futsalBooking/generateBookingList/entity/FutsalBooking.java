@@ -11,15 +11,14 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "booking")
-public class Booking extends AbstractEntity {
+@Table(name = "futsal_booking")
+public class FutsalBooking extends AbstractEntity {
     @Column(name = "vendor_code")
     private String vendorCode;
 

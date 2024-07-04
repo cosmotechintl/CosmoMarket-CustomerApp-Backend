@@ -1,4 +1,4 @@
 package com.cosmo.futsalBooking.generateBookingList.model;
 
-public class BookingLists {
+public class FutsalBookingLists {
 }
