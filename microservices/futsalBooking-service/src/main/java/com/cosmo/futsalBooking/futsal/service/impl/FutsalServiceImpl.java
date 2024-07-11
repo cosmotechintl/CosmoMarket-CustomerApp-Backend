@@ -1,12 +1,12 @@
 package com.cosmo.futsalBooking.futsal.service.impl;
 
-import com.cosmo.common.model.SearchParam;
-import com.cosmo.common.service.PropertiesFileValue;
 import com.cosmo.common.constant.ApiConstant;
-import com.cosmo.common.model.ApiResponse;
 import com.cosmo.common.constant.ServiceConstant;
+import com.cosmo.common.model.ApiResponse;
+import com.cosmo.common.model.SearchParam;
 import com.cosmo.common.service.AbstractConnectorService;
 import com.cosmo.common.service.ConnectorService;
+import com.cosmo.common.service.PropertiesFileValue;
 import com.cosmo.futsalBooking.futsal.model.FetchFutsalByVendor;
 import com.cosmo.futsalBooking.futsal.model.FetchFutsalDetail;
 import com.cosmo.futsalBooking.futsal.service.FutsalService;
@@ -32,11 +32,11 @@ public class FutsalServiceImpl extends AbstractConnectorService implements Futsa
     protected String getBaseUrl() {
         return propertiesFileValue.getFutsalServiceUrl();
     }
+
     @Override
     public Mono<ApiResponse<Object>> getFutsalDetails(FetchFutsalDetail fetchFutsalDetail) {
-        log.info("Vendor Code :::{}", fetchFutsalDetail);
         return connectToService(fetchFutsalDetail,
-                ApiConstant.FUTSAL+ApiConstant.SLASH+ApiConstant.GET+ApiConstant.SLASH+ApiConstant.DETAIL,
+                ApiConstant.FUTSAL + ApiConstant.SLASH + ApiConstant.GET + ApiConstant.SLASH + ApiConstant.DETAIL,
                 new ParameterizedTypeReference<>() {
                 });
     }
@@ -48,7 +48,7 @@ public class FutsalServiceImpl extends AbstractConnectorService implements Futsa
         payload.put("searchParam", searchParam);
         payload.put("fetchFutsalByVendorCode", fetchFutsalByVendor);
         return connectToService(payload,
-                ApiConstant.FUTSAL+ApiConstant.SLASH+ApiConstant.GET_BY_CODE,
+                ApiConstant.FUTSAL + ApiConstant.SLASH + ApiConstant.GET_BY_CODE,
                 new ParameterizedTypeReference<>() {
                 });
     }

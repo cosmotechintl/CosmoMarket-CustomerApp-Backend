@@ -19,14 +19,24 @@ import java.time.LocalTime;
 @Entity
 @Table(name = "futsal_booking")
 public class FutsalBooking extends AbstractEntity {
+
     @Column(name = "vendor_code")
     private String vendorCode;
 
-    @Column(name = "customer_name")
-    private String customerName;
+    @Column(name = "futsal_code")
+    private String futsalCode;
+
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "last_name")
+    private String lastName;
 
     @Column(name = "mobile_number", unique = true)
     private String mobileNumber;
+
+    @Column(name = "email", unique = true)
+    private String email;
 
     @Column(name = "date")
     private LocalDate date;
@@ -36,9 +46,6 @@ public class FutsalBooking extends AbstractEntity {
 
     @Column(name = "end_time")
     private LocalTime endTime;
-
-    @Column(name = "is_booked")
-    private Boolean isBooked;
 
     @Column(name = "amount")
     private String amount;

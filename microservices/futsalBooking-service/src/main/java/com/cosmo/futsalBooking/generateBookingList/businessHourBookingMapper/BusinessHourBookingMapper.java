@@ -22,7 +22,6 @@ public abstract class BusinessHourBookingMapper {
         futsalBooking.setDate(findNearestDate(businessHour.getDay(), daysInFuture));
         futsalBooking.setStartTime(startTime);
         futsalBooking.setEndTime(startTime.plusHours(1));
-        futsalBooking.setIsBooked(false);
         futsalBooking.calculateAndSetAmount();
         return futsalBooking;
     }
