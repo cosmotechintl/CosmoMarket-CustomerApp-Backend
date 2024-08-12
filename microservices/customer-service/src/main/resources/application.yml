@@ -26,9 +26,11 @@ spring:
       hibernate.connection.useUnicode: true
       globally_quoted_identifiers: true
     properties:
-      hibernate.cache.use_second_level_cache: false
+      hibernate.cache.use_second_level_cache: true
+      hibernate.cache.region.factory_class: org.hibernate.cache.jcache.internal.JCacheRegionFactory
+      jakarta.persistence.sharedCache.mode: ENABLE_SELECTIVE
       hibernate.cache.use_query_cache: false
-      hibernate.generate_statistics: false
+      hibernate.generate_statistics: true
       hibernate.show_sql: false
       hibernate.format_sql: false
       hibernate.jdbc.batch_size: 500
@@ -88,4 +90,6 @@ logging:
         orm:
           jpa:
             JpaTransactionManager: DEBUG
+      hibernate:
+        cache: DEBUG
 

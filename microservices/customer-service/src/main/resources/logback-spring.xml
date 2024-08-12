@@ -10,25 +10,25 @@
         </encoder>
     </appender>
 
-    <appender name="LOKI" class="com.github.loki4j.logback.Loki4jAppender">
-        <http>
-            <url>http://localhost:3100/loki/api/v1/push</url>
-        </http>
-        <format>
-            <label>
-                <pattern>app=${name},host=${HOSTNAME},level=%level</pattern>
-                <readMarkers>true</readMarkers>
-            </label>
-            <message>
-                <pattern>%d{XXX} %highlight(%-5level) %magenta(${PID}) --- [${name}] [%thread] %cyan(%logger{36}) : %msg TraceId:%X{traceId} SpanId:%X{spanId}%n</pattern>
-            </message>
-            <sortByTime>true</sortByTime>
-        </format>
-    </appender>
+<!--    <appender name="LOKI" class="com.github.loki4j.logback.Loki4jAppender">-->
+<!--        <http>-->
+<!--            <url>http://localhost:3100/loki/api/v1/push</url>-->
+<!--        </http>-->
+<!--        <format>-->
+<!--            <label>-->
+<!--                <pattern>app=${name},host=${HOSTNAME},level=%level</pattern>-->
+<!--                <readMarkers>true</readMarkers>-->
+<!--            </label>-->
+<!--            <message>-->
+<!--                <pattern>%d{XXX} %highlight(%-5level) %magenta(${PID}) -&#45;&#45; [${name}] [%thread] %cyan(%logger{36}) : %msg TraceId:%X{traceId} SpanId:%X{spanId}%n</pattern>-->
+<!--            </message>-->
+<!--            <sortByTime>true</sortByTime>-->
+<!--        </format>-->
+<!--    </appender>-->
 
     <root level="INFO">
         <appender-ref ref="CONSOLE" />
-        <appender-ref ref="LOKI" />
+<!--        <appender-ref ref="LOKI" />-->
     </root>
 
 </configuration>
